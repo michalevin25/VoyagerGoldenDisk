@@ -1,0 +1,18 @@
+function [locs_max, locs_min] = FindpeaksTraceRetrace(signal,peakdistance)
+%find peaks in image signal that represent the trace and retrace
+
+%maxima
+[~,locs_max] = findpeaks(signal,'MinPeakDistance', peakdistance);
+%minima
+[~,locs_min] = findpeaks(-1*signal,'MinPeakDistance', peakdistance);
+
+%plot peaks 
+
+figure; plot(signal)
+hold on
+plot(locs_max,signal(locs_max), 'o');
+plot(locs_min,signal(locs_min), 'o');
+title ('Peaks that represent trace and retrace');
+xlabel('Samples');
+ylabel('Amplitude');
+

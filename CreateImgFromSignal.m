@@ -1,0 +1,65 @@
+function  CreateImgFromSignal(ch_num,channel,peakheight,peakdistance_channel,calib_peak,fs,img_folder)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Find peaks that mark the beginning and end of each image in the signal.
+% For every signal between two peaks:
+
+% RemoveNoiseImgSignal:
+    % 1. Find noise at the beginning and end of every image signal
+    % 2. check that the code didn?t detect too much noise.
+    % 3. Remove noise from signal.
+    
+% FindpeaksTraceRetrace:
+%     Find peaks in image signal that represent the trace and retrace
+
+% AdjustmentsTracePeaks:
+%     Adjust peaks in 3 steps
+    
+% CreateImgFromTrace:
+%     1. Iterate over the signal that represents an image to find the traces. 
+%     2. Create a matrix in which each row is a trace.
+%     3. Create image from the matrix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+txt = strcat("creating images from channel ", num2str(ch_num));
+disp(txt)
+
+%find peaks that mark the beginning and end of an image in the signal
+[~,locs] = findpeaks(channel,'MinPeakHeight',peakheight,'MinPeakDistance',peakdistance_channel);
+
+T = 1/fs;                % Sampling period       
+L = length(channel);      % Length of signal
+t = (0:L-1)*T; 
+
+%{
+figure; 
+plot(t,channel);
+hold on
+plot(t(locs),channel(locs), 'o');
+title ('Peaks that represent beginning and end of image');
+xlabel ('samples');
+ylabel ('Amplitude');
+%}
+
+
+%Create images from the individual signals
+peakdistance_img = 700;
+
+% calib_peak: Each channel starts with a callibration signal. Ignore the peaks found in
+% that area.
+for i = calib_peak:length(locs)-1
+    img_number = i-2;
+    txt = strcat("creating image ", num2str(img_number));
+    disp(txt)
+    img_strt = locs(i);
+    img_stp = locs(i+1);
+    noisy_signal = channel(img_strt:img_stp);
+    
+    signal = RemoveNoiseImgSignal(noisy_signal,peakdistance_img,fs);
+    [locs_max, locs_min] = FindpeaksTraceRetrace(signal, peakdistance_img);
+    [locs_max, locs_min, counter_adjust] = AdjustmentsTracePeaks (locs_max, locs_min);
+    CreateImgFromTrace(signal,locs_min, locs_max, counter_adjust,img_folder,img_number);
+    
+end
