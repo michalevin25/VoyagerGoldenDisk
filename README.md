@@ -4,41 +4,41 @@
 flowchart TB
     id1[<b>Main:</b> <br /> <br /> 1. load mp3 file <br /> <br /> 2. separate mp3 file to channels]
     
-    id2[<b>CreateImgFromSignal:</b> <br /> <br /> Find peaks that mark the beginning and end of each image in the signal.]
+    id2[<b>CreateImgFromSignal:</b> <br /> <br /> Find peaks that mark the beginning and end<br /> of each image in the signal.]
     
     plt1((Plot 1)) 
     
     id3[For every signal between two <br /> peaks of image signal:]
     
-    id4{{The start or end of image signal is noisy sometimes.<br /> In these periods the spectrum of the signal has <br /> harmonics. If the signal has more than 3 harmonics, I <br /> considered it noisy.}}
+    id4{{<i>The start or end of image signal <br /> is noisy sometimes.<br /> <br />In these periods the spectrum <br /> of the signal has harmonics. <br /><br /> If the signal has more than 3 harmonics,<br /> I considered it noisy.</i>}}
     
     id5[<b>RemoveNoiseImgSignal:</b>  <br /> <br /> 1. Find noise at the beginning and end of every image signal <br /> <br /> 2. check that the code didnt detect too  much noise. <br /> <br />3. Remove noise from signal. ]
     
     plt2((Plot 2)) 
     
-    id6[<b>FindNoisySignal:</b>  <br /> <br /> Peaks in the spectrum represent <br /> harmonics. Iterate over a window the size of one trace + retrace until a       <br /> signal with less than 3 harmonics is found. Count how many noisy windows were found.]
+    id6[<b>FindNoisySignal:</b>  <br /> <br /> Peaks in the spectrum represent harmonics. <br />Iterate over a window the size of one trace + retrace<br /> until a signal with less than 3 harmonics is found.<br /> Count how many noisy windows were found.]
     
-    id7[<b>FindPeaksInSpectrum:</b>  <br /> <br /> Create spectrum in signal using fft, and find peaks. The peaks represent <br /> harmonics. If a signal has         harmonics, its considered noisy in the current problem.]
+    id7[<b>FindPeaksInSpectrum:</b>  <br /> <br /> Create spectrum in signal using fft, and find peaks. <br />The peaks represent harmonics. If a signal has  harmonics,<br /> its considered noisy in the current problem.]
     
     plt34((Plots 3,4)) 
     
-    id8[<b>FindpeaksTraceRetrace:</b> <br />  <br /> find peaks in image signal that represent<br /> the trace and retrace]
+    id8[<b>FindpeaksTraceRetrace:</b> <br />  <br /> find peaks in image signal that<br />  representthe trace and retrace]
     
     plt5((Plot 5)) 
     
     id9[<b>AdjustmentsTracePeaks:</b> <br />  <br /> Adjust peaks in 3 steps: <br /> <br /> 1.	Throw an error if there is a significant <br />difference between max and minpeaks numbers. <br /> This means that the code didnt detect the right peaks <br /> because the signal is symmetric. <br /> <br /> 2.	Make peaks lengths equal. <br /> Removing elements from the longer locs array  <br />to create equal locs arrays for future loops. <br /> <br /> 3.	adjust peaks order of appearance:<br /> The first min is always before the first max.]
     
-    id10[<b>CreateImgFromTrace:</b> <br />  <br /> 1. Iterate over the signal that represents<br /> an image to find the traces.]
+    id10[<b>CreateImgFromTrace:</b> <br />  <br /> 1. Iterate over the signal that<br /> represents an image to find the traces.]
     
     plt6((Plot 6))
     
-    id11[ 2. Create a matrix in which each row is a trace. <br /> <br /> 3. Create image from the matrix.]
+    id11[<br /> 2. Create a matrix in which each row is a trace. <br /> <br /> 3. Create image from the matrix.]
     
-    id1 --> id2 --> plt1 ---> id3
-    id3  --> id4 -->  id5 --> plt2--> id6 --> id7 --> plt34
-    id3 --> id8 --> plt5
-    id3 --> id9
-    id3 --> id10 --> plt6 --> id11
+    id1--> id2 --> plt1 ---> id3
+    id3 --- 1 --> id4  --> id5 --> plt2--> id6 --> id7 --> plt34
+    id3--- 2--> id8 --> plt5
+    id3---  3--> id9
+    id3---  4--> id10 --> plt6 --> id11
 
 ```
 
