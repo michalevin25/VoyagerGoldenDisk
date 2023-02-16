@@ -1,4 +1,20 @@
 # VoyagerGoldenDisk
+## Intro:
+### From wikipedia: 
+> <i>The Voyager Golden Records are two phonograph records that were included aboard both Voyager spacecraft launched in 1977. The records contain sounds and images selected to portray the diversity of life and culture on Earth, and are intended for any intelligent extraterrestrial life form who may find them. The records are a time capsule.
+    </i>
+    
+The given signal contains only the images (without sounds). The key to decoding it is understanding how the decoding of a monochrome television works. 
+<br /> 
+[Youtube video that helped me understand the decoding concept in momochrome TV]( https://www.youtube.com/watch?v=5yiJzNx6BCM&t=449s&ab_channel=EngineeringFunda)
+
+<br /> 
+
+[Another helpful blog on the Voyager decoding](https://boingboing.net/2017/09/05/how-to-decode-the-images-on-th.html)
+
+## Workflow of my code:
+Below is a flowchart describing the different functions in my code. In the flowchart are references to plots, which are shown after the flowchart, and are commented out in the code itself. 
+
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '35px'}}}%%
 flowchart TB
