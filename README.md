@@ -66,10 +66,10 @@ flowchart TB
     class plt1,plt2,plt34,plt5,plt6 nodesplt;
     
     %% styling:
-    classDef default      fill:#F8CCDC
-    classDef nodesfunc    fill:#A2DCE7, stroke:#333,stroke-width:4px
-    classDef nodescomment fill:#FFED86, stroke:#333,stroke-width:4px
-    classDef nodesplt     fill:#FFB067, stroke:#333,stroke-width:4px, color:#fff
+    classDef default      fill:#f8a5c2
+    classDef nodesfunc    fill:#63cdda, stroke:#333,stroke-width:4px
+    classDef nodescomment fill:#f5cd79, stroke:#333,stroke-width:4px
+    classDef nodesplt     fill:#f3a683, stroke:#333,stroke-width:4px, color:#fff
 
 ```
 
