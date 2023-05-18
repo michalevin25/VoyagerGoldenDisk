@@ -41,7 +41,7 @@ flowchart TB
         
     id9[<b>AdjustmentsTracePeaks:</b> <br />  <br /> Adjust peaks in 3 steps: <br /> <br /> 1.	Throw an error if there is a significant <br />difference between max and minpeaks numbers. <br /> This means that the code didnt detect the right peaks <br /> because the signal is symmetric. <br /> <br /> 2.	Make peaks lengths equal. <br /> Removing elements from the longer locs array  <br />to create equal locs arrays for future loops. <br /> <br /> 3.	adjust peaks order of appearance:<br /> The first min is always before the first max.]
     
-    id10[<b>CreateImgFromTrace:</b> <br />  <br /> 1. Iterate over the signal that<br /> represents an image to find the traces.<br /> 2. Create a matrix in which each row is a trace. <br /> <br /> 3. Create image from the matrix.]
+    id10[<b>CreateImgFromTrace:</b> <br />  <br /> 1. Iterate over the signal that<br /> represents an image to find the traces.<br /> 2. Create a matrix in which each row is an odd trace. <br /> <br /> 3. Add padding to beginning of shorter traces to achieve even lengths <br /> <br />  4. Create image from the matrix.]
     
     %% plot nodes:
    
